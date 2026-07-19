@@ -21,11 +21,11 @@ jobs:
       - name: Run Idle Script
         env:
           ACCOUNT_NAME: "main_account"
+          PASSWORD: ${{ secrets.STEAM_PASSWORD }}
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
           STEAM_GAMES: ${{ secrets.STEAM_GAMES }}
         run: |
-          # Formats the exact config and account files this specific repo needs
           mkdir -p configs
           echo "{\"username\":\"$STEAM_USERNAME\",\"password\":\"$STEAM_PASSWORD\",\"sharedSecret\":\"\",\"games\":[$STEAM_GAMES]}" > configs/main_account.json
           node index.js

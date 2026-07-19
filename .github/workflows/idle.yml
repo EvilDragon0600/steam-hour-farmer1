@@ -20,14 +20,7 @@ jobs:
 
       - name: Run Idle Script
         env:
-          ACCOUNT_NAME: "main_account"
-          USERNAME: ${{ secrets.STEAM_USERNAME }}
+          ACCOUNT_NAME: ${{ secrets.STEAM_USERNAME }}
           PASSWORD: ${{ secrets.STEAM_PASSWORD }}
           GAMES: ${{ secrets.STEAM_GAMES }}
-          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
-          STEAM_GAMES: ${{ secrets.STEAM_GAMES }}
-        run: |
-          mkdir -p configs
-          echo "{\"username\":\"$STEAM_USERNAME\",\"password\":\"$STEAM_PASSWORD\",\"sharedSecret\":\"\",\"games\":[$STEAM_GAMES]}" > configs/main_account.json
-          node index.js
+        run: node index.js

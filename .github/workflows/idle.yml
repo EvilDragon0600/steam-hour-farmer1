@@ -1,0 +1,29 @@
+name: Steam Idle Bot
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Idle Script
+        env:
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
+          STEAM_GAMES: ${{ secrets.STEAM_GAMES }}
+        run: |
+          # Creates a temporary config format that the script expects
+          echo "[{\"username\":\"$STEAM_USERNAME\",\"password\":\"$PASSWORD\",\"games\":[$STEAM_GAMES],\"online\":true}]" > config.json
+          node index.js
